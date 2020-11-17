@@ -62,7 +62,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-search-select {
         display: inline-block;
         margin-right: 3.6rem;

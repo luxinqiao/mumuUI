@@ -108,7 +108,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .form-condition {
         margin-top: 1rem;
         >.label {

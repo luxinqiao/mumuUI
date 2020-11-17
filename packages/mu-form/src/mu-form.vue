@@ -67,7 +67,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-form {
         user-select: none;
     }

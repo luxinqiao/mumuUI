@@ -48,7 +48,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-form-frame {
         margin-top: 2rem;
         >.mu-form-frame-title {

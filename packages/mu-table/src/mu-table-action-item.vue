@@ -1,7 +1,5 @@
 <template>
-    <div class='hideColumns'>
-        
-    </div>
+    <div class='hideColumns'></div>
 </template>
 
 <script>
@@ -27,7 +25,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .hideColumns {
         visibility: hidden;
         width: 0; height: 0;

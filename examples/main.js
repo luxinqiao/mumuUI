@@ -10,11 +10,6 @@ Vue.prototype.$domain = 'http://106.15.63.76:3000/'
 
 import mumuUI from '../packages/index'
 Vue.use(mumuUI)
-/*
-import mumuUI from 'mumu-ui'
-import 'mumu-ui/lib/mumu-ui.css'
-Vue.use(mumuUI)
-*/
 
 import router from './router'
 import App from './App.vue'

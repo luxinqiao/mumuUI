@@ -39,7 +39,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-search-text {
         display: inline-block;
         margin-right: 3.6rem;

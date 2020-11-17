@@ -233,7 +233,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-table {
         >.mu-table-thead {
 
@@ -244,7 +244,6 @@
         }
         table {
             width: 100%;
-            
             >thead {
                 background-color: #e6e6e6;
                 >tr {

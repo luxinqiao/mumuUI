@@ -197,7 +197,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-dialog {
         position: fixed; z-index: 99;
         top: 0; bottom: 0; left: 0; right: 0;

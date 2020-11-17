@@ -157,7 +157,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-page {
         height: 5rem;
         box-shadow: inset 0 -0.1rem 0 0.1rem #ddd;

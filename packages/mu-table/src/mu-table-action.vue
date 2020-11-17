@@ -20,7 +20,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .hideColumns {
         visibility: hidden;
         width: 0; height: 0;

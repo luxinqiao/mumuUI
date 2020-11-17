@@ -12,3 +12,8 @@ npm login
 
 ### npm publish
 npm publish
+
+### use mumuUI
+import mumuUI from 'mumu-ui'
+import 'mumu-ui/lib/mumu-ui.css'
+Vue.use(mumuUI)

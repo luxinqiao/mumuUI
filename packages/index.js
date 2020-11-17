@@ -1,9 +1,10 @@
-import {muDialog} from './mu-dialog/index.js'
-import {muSearch, muSearchText, muSearchSelect, muSearchButton} from './mu-search/index.js'
 import {muButtons, muButton} from './mu-buttons/index.js'
-import {muTable, muTableColumn, muTableAction, muTableActionItem} from './mu-table/index.js'
-import {muPage} from './mu-page/index.js'
+import {muDialog} from './mu-dialog/index.js'
 import {muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox} from './mu-form/index.js'
+import {muPage} from './mu-page/index.js'
+import {muSearch, muSearchText, muSearchSelect, muSearchButton} from './mu-search/index.js'
+import {muTab, muTabItem} from './mu-tab/index.js'
+import {muTable, muTableColumn, muTableAction, muTableActionItem} from './mu-table/index.js'
 import {muTree, muTreeItem} from './mu-tree/index.js'
 import {muSwiper} from './mu-swiper/index.js'
 
@@ -15,12 +16,13 @@ const install = function(Vue) {
     }
     //遍历注册全局组件
     const components = [
-        muDialog,
-        muSearch, muSearchText, muSearchSelect, muSearchButton,
         muButtons, muButton,
-        muTable, muTableColumn, muTableAction, muTableActionItem,
-        muPage,
+        muDialog,
         muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox,
+        muPage,
+        muSearch, muSearchText, muSearchSelect, muSearchButton,
+        muTab, muTabItem,
+        muTable, muTableColumn, muTableAction, muTableActionItem,
         muTree, muTreeItem,
         muSwiper
     ]
@@ -34,25 +36,24 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 //自适应布局：动态设置rem与px比例
-let pxW = 1920
-const resizeFontSize = () => {
-    document.documentElement.style.fontSize = document.documentElement.clientWidth / pxW * 10 + 'px'
+const resizeFontSize = (w) => {
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / w * 10 + 'px'
 }
-resizeFontSize()
+resizeFontSize(1920)
 window.addEventListener('resize', resizeFontSize, false)
 
 export default {
     install, //供Vue.use()方法安装
-    muDialog,
-    muSearch, muSearchText, muSearchSelect, muSearchButton,
     muButtons, muButton,
-    muTable, muTableColumn, muTableAction, muTableActionItem,
-    muPage,
+    muDialog,
     muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox,
+    muPage,
+    muSearch, muSearchText, muSearchSelect, muSearchButton,
+    muTab, muTabItem,
+    muTable, muTableColumn, muTableAction, muTableActionItem,
     muTree, muTreeItem,
     muSwiper,
-    resetPxWidth: (w=1920) => { //重置设计图基准像素宽度（默认1920px下，1rem=10px）
-        pxW = w
-        resizeFontSize()
+    resetPxWidth: (w=1920) => { //重置基准像素宽度（默认1920px下，1rem=10px）
+        resizeFontSize(w)
     }
 }

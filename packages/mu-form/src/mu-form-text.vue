@@ -70,7 +70,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-form-condition {
         margin-top: 1rem; padding-right: 7.2rem;
         height: 3rem;

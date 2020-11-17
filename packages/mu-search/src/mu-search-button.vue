@@ -26,7 +26,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
     .mu-search-button {
         display: inline-block;
         padding-left: 3.6rem;
