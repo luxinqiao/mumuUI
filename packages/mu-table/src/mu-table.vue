@@ -30,7 +30,7 @@
                             <div v-else-if='td.field=="mu-table-action"' class='action'>
                                 <span v-for='(item, k) in actionArr' :key='k' @click='clickAction(tr, k)'>{{item.label}}</span>
                             </div>
-                            <div v-else class='field'>{{tr[td.field]}}</div>
+                            <div v-else class='field'>{{getFieldVal(j, tr[td.field])}}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -149,6 +149,28 @@
                 } else {
                     return 0
                 }
+            },
+
+            /**
+                获取字段值
+                @param {Number} i 字段序号
+                @param {String} val 原值
+                @return {String} 新值
+             */
+            getFieldVal(i, val) {
+                const fieldHead = this.fieldHeadArr[i]
+                if (fieldHead.formatVal.toString() == '()=>{}') {
+                    return val
+                }
+                return fieldHead.formatVal({
+                    align: fieldHead.align,
+                    col: fieldHead.col,
+                    field: fieldHead.field,
+                    label: fieldHead.label,
+                    row: fieldHead.row,
+                    width: fieldHead.width,
+                    val: val
+                })
             },
             /**
                 选中/取消行

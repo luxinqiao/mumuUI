@@ -7,6 +7,12 @@ const routes = [{
 }, {
     path: '/user',
     component: () => import('../pages/user/list.vue')
+}, {
+    path: '/swiper',
+    component: () => import('../pages/swiper')
+}, {
+    path: '/tab',
+    component: () => import('../pages/tab')
 }]
 
 export default routes

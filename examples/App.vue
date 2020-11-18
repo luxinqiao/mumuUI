@@ -6,7 +6,7 @@
             <span :class='activeMenu=="/home" ? "active tabItem" : "tabItem"'>首页</span>
             <span :class='activeMenu=="/user" ? "active tabItem" : "tabItem"'>
                 <span>用户管理</span>
-                <img src='./img/home/close-tab.png'>
+                <img src='./img/common/close-tab.png'>
             </span>
         </div>
         <div id='content'>

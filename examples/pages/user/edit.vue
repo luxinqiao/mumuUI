@@ -39,6 +39,8 @@
 </template>
 
 <script type="text/javascript">
+    import {getDicts} from '../../utils/dict.js'
+
     export default {
         name: "userEdit",
         props: {
@@ -50,56 +52,16 @@
         data() {
             return {
                 userObj: {},
-                sexArr: [
-                    {value: '0', label: '未知'},
-                    {value: '1', label: '男'},
-                    {value: '2', label: '女'}
-                ],
-                habitArr: [
-                    {value: '1', label: '跑步'},
-                    {value: '2', label: '游泳'},
-                    {value: '3', label: '瑜伽'},
-                    {value: '4', label: '音乐'},
-                    {value: '5', label: '电影'},
-                    {value: '6', label: '旅游'},
-                    {value: '7', label: '美食'},
-                    {value: '8', label: '购物'},
-                    {value: '9', label: '其他'}
-                ],
-                educationArr: [
-                    {value: '0', label: '请选择'},
-                    {value: '1', label: '小学'},
-                    {value: '2', label: '初中'},
-                    {value: '3', label: '高中'},
-                    {value: '4', label: '大专'},
-                    {value: '5', label: '本科'},
-                    {value: '6', label: '硕士'},
-                    {value: '7', label: '博士'}
-                ],
-                jobArr: [
-                    {value: '0', label: '请选择'},
-                    {value: '1', label: '服务业'},
-                    {value: '2', label: '建筑业'},
-                    {value: '3', label: '制造业'},
-                    {value: '4', label: '农业'},
-                    {value: '5', label: '纺织业'},
-                    {value: '6', label: '加工业'},
-                    {value: '7', label: '个体'},
-                    {value: '8', label: 'IT'}
-                ],
-                incomeArr: [
-                    {value: '0', label: '请选择'},
-                    {value: '1', label: '10万以下'},
-                    {value: '2', label: '10万-20万'},
-                    {value: '3', label: '20万-50万'},
-                    {value: '4', label: '50万-100万'},
-                    {value: '5', label: '100万-500万'},
-                    {value: '6', label: '500万以上'}
-                ]
+                sexArr: [],
+                habitArr: [],
+                educationArr: [],
+                jobArr: [],
+                incomeArr: []
             }
         },
         mounted() {
             this.initData()
+            this.initDict()
         },
         methods: {
             initData() {
@@ -115,6 +77,44 @@
                     }
                 })
             },
+            initDict() {
+                const sexs = getDicts('user', 'sex')
+                for (let i=0; i<sexs.length; i++) {
+                    this.sexArr.push({
+                        value: sexs[i].value,
+                        label: sexs[i].desc
+                    })
+                }
+                const habits = getDicts('user', 'habit')
+                for (let i=0; i<habits.length; i++) {
+                    this.habitArr.push({
+                        value: habits[i].value,
+                        label: habits[i].desc
+                    })
+                }
+                const educations = getDicts('user', 'education')
+                for (let i=0; i<educations.length; i++) {
+                    this.educationArr.push({
+                        value: educations[i].value,
+                        label: educations[i].desc
+                    })
+                }
+                const jobs = getDicts('user', 'job')
+                for (let i=0; i<jobs.length; i++) {
+                    this.jobArr.push({
+                        value: jobs[i].value,
+                        label: jobs[i].desc
+                    })
+                }
+                const incomes = getDicts('user', 'income')
+                for (let i=0; i<incomes.length; i++) {
+                    this.incomeArr.push({
+                        value: incomes[i].value,
+                        label: incomes[i].desc
+                    })
+                }
+            },
+
             close() {
                 this.$parent.close()
             },

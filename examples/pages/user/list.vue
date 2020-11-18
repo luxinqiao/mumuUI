@@ -22,14 +22,14 @@
                     <mu-table-column field='check' label='' width='34' align='center'></mu-table-column>
                     <mu-table-column field='no' label='序号' width='40'></mu-table-column>
                     <mu-table-column field='name' label='姓名' width='65'></mu-table-column>
-                    <mu-table-column field='sex' label='性别' width='40'></mu-table-column>
+                    <mu-table-column field='sex' label='性别' width='40' :formatVal='formatDictDesc'></mu-table-column>
                     <mu-table-column field='birthday' label='生日' width='70'></mu-table-column>
                     <mu-table-column field='phone' label='手机号' width='70'></mu-table-column>
                     <mu-table-column field='school' label='毕业院校' width='120'></mu-table-column>
-                    <mu-table-column field='education' label='学历' width='50'></mu-table-column>
+                    <mu-table-column field='education' label='学历' width='50' :formatVal='formatDictDesc'></mu-table-column>
                     <mu-table-column field='company' label='公司名称' width='120'></mu-table-column>
-                    <mu-table-column field='job' label='岗位' width='60'></mu-table-column>
-                    <mu-table-column field='income' label='收入（万元）' width='60'></mu-table-column>
+                    <mu-table-column field='job' label='岗位' width='60' :formatVal='formatDictDesc'></mu-table-column>
+                    <mu-table-column field='income' label='收入（万元）' width='60' :formatVal='formatDictDesc'></mu-table-column>
                     <mu-table-action label='操作' width='100'>
                         <mu-table-action-item label='查看' @bindClick='goDetail'></mu-table-action-item>
                         <mu-table-action-item label='编辑' @bindClick='goEdit'></mu-table-action-item>
@@ -58,6 +58,7 @@
 <script>
 import userAdd from './add.vue'
 import userEdit from './edit.vue'
+import {getDicts, getDictDesc} from '../../utils/dict.js'
 
 export default {
     name: 'App',
@@ -69,17 +70,13 @@ export default {
                 sex: '1'
             },
             queryObj: {},
-            sexArr: [
-                {value: '0', label: '未知'},
-                {value: '1', label: '男'},
-                {value: '2', label: '女'}
-            ],
+            sexArr: [],
             iconObj: {
-                add: require('../../img/common/table/add.png'),
-                edit: require('../../img/common/table/edit.png'),
-                delete: require('../../img/common/table/delete.png'),
-                import: require('../../img/common/table/import.png'),
-                export: require('../../img/common/table/export.png')
+                add: require('../../img/user/add.png'),
+                edit: require('../../img/user/edit.png'),
+                delete: require('../../img/user/delete.png'),
+                import: require('../../img/user/import.png'),
+                export: require('../../img/user/export.png')
             },
             tableData: [],
             selectRowId: '',
@@ -148,14 +145,9 @@ export default {
     },
     mounted() {
         this.initData()
+        this.initDict()
     },
     methods: {
-        expandNode(item) {
-            console.log('expandNode:', item)
-        },
-        checkNode(item) {
-            console.log('checkNode:', item)
-        },
         /**
             初始化数据
             @param
@@ -182,6 +174,29 @@ export default {
                     this.pageObj.total = res.data
                 }
             })
+        },
+        /**
+            初始化字典
+            @param
+            @return
+         */
+        initDict() {
+            const sexs = getDicts('user', 'sex')
+            for (let i=0; i<sexs.length; i++) {
+                this.sexArr.push({
+                    value: sexs[i].value,
+                    label: sexs[i].desc
+                })
+            }
+
+        },
+        /**
+            格式化转换字典描述
+            @param {Object} param 字段信息
+            @return {String} 字典描述
+         */
+        formatDictDesc(param) {
+            return getDictDesc('user', param.field, param.val)
         },
         /**
             查询
@@ -220,6 +235,23 @@ export default {
             this.pageObj.pageNo = 1
             this.initData()
         },
+        /**
+            展开树节点
+            @param {Object} item 树节点
+            @return
+         */
+        expandNode(item) {
+            console.log('expandNode:', item)
+        },
+        /**
+            选中树节点
+            @param {Object} item 树节点
+            @return
+         */
+        checkNode(item) {
+            console.log('checkNode:', item)
+        },
+
         /**
             跳转-新增
             @param

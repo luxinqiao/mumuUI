@@ -23,6 +23,10 @@
             align: { //对齐方式：left,center,right
                 type: String,
                 default: 'left'
+            },
+            formatVal: { //值转换
+                type: Function,
+                default: ()=>{}
             }
         }
     }

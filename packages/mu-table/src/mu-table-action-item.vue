@@ -18,7 +18,6 @@
                 @return
              */
             clickActionItem(rowData) {
-                console.log('action-item:', rowData)
                 this.$emit('bindClick', rowData)
             }
         }

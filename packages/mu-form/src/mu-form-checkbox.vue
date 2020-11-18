@@ -69,12 +69,14 @@
                 @return {Boolean} 是否选中
              */
             validChecked(itemVal) {
-                if (this.value == undefined) {
+                if (this.value == undefined || this.value == '') {
                     return false
                 }
-                let valArr = this.value.split(',')
-                if (valArr.indexOf(itemVal) > -1) {
-                    return true
+                const valArr = this.value.split(',')
+                for (let i=0; i<valArr.length; i++) {
+                    if (valArr[i] == itemVal) {
+                        return true
+                    }
                 }
                 return false
             },
@@ -84,12 +86,20 @@
                 @return
              */
             change(itemVal) {
-                let valArr = this.value.split(',')
-                const index = valArr.indexOf(itemVal)
-                if (index == -1) {
+                let valArr = []
+                if (this.value != '') {
+                    valArr = this.value.split(',')
+                }
+                let isIn = false
+                for (let i=0; i<valArr.length; i++) {
+                    if (valArr[i] == itemVal) {
+                        valArr.splice(i, 1)
+                        isIn = true
+                        break
+                    }
+                }
+                if (!isIn) {
                     valArr.push(itemVal)
-                } else {
-                    valArr.splice(index, 1)
                 }
                 this.value = valArr.join(',')
             }
