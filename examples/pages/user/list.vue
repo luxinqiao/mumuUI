@@ -188,7 +188,6 @@ export default {
                     label: sexs[i].desc
                 })
             }
-
         },
         /**
             格式化转换字典描述

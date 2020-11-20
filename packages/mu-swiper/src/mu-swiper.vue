@@ -2,7 +2,7 @@
     <div class='swiper' @mousedown='mousedown($event)' @mousemove='mousemove($event)' @mouseup='mouseup($event)' @mouseleave='mouseleave($event)'>
         <img class='swiper-item' v-for='(item, i) in datas' :key='i' :src='item' :class='getImgClass(i)' :ref='"img"+i'>
         <div class='swiper-index' :style='{width: 5.2*datas.length+"rem"}'>
-            <span v-for='(item, i) in datas' :key='i' @click='transIndex(i)'>
+            <span v-for='(item, i) in datas' :key='i' @click='transSwiper(i)'>
                 <span :class='i==currIndex?"active":""'></span>
             </span>
         </div>
@@ -20,19 +20,25 @@
                     return []
                 }
             },
-            interval: { //轮播间隔（单位：ms）
+            defaultNo: { //默认序号
+                type: Number,
+                default: ()=>{
+                    return 0
+                }
+            },
+            interval: { //轮播切换间隔（单位：ms）
                 type: Number,
                 default: ()=>{
                     return 4000
                 }
             },
-            animationInterval: { //轮播执行动画间隔（单位：ms）
+            animationInterval: { //轮播切换时滑动所需时间（单位：ms）
                 type: Number,
                 default: ()=>{
                     return 400
                 }
             },
-            moveDistance: { //需触发轮播的鼠标移动x轴最小距离（单位：px）
+            moveDistance: { //触发轮播切换的鼠标移动x轴最小距离（单位：px）
                 type: Number,
                 default: ()=>{
                     return 100
@@ -54,6 +60,9 @@
         mounted() {
             this.prevIndex = this.datas.length - 1
             this.refreshInterval()
+            if (this.defaultNo > 0) {
+                this.transSwiper(this.defaultNo)
+            }
         },
         methods: {
             /**
@@ -189,7 +198,7 @@
                 @param {Number} i 指定序号
                 @return
              */
-            transIndex(i) {
+            transSwiper(i) {
                 if (this.transing) {
                     return
                 }
@@ -290,6 +299,11 @@
                     return 'curr'
                 }
                 return ''
+            }
+        },
+        watch: {
+            currIndex(val) {
+                this.$emit('bindChange', val)
             }
         }
     }
