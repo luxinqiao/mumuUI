@@ -1,8 +1,5 @@
 ### install
-npm i mumu-ui -s
-
-### compiles and hot-reloads for development
-npm run serve
+npm i mumu-ui --save
 
 ### use mumuUI
 import mumuUI from 'mumu-ui'

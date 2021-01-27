@@ -18,7 +18,7 @@
                     <mu-button :icon='iconObj.export' label='导出' align='right'></mu-button>
                     <mu-button :icon='iconObj.import' label='导入' align='right'></mu-button>
                 </mu-buttons>
-                <mu-table class='mu-table' :datas='tableData' :pageSize='pageObj.pageSize' @bindCheckRow='bindCheckRow' ref='muTable'>
+                <mu-table class='mu-table' :datas='tableData' :pageSize='pageObj.pageSize' :loading='tableLoad' @bindCheckRow='bindCheckRow' ref='muTable'>
                     <mu-table-column field='check' label='' width='34' align='center'></mu-table-column>
                     <mu-table-column field='no' label='序号' width='40'></mu-table-column>
                     <mu-table-column field='name' label='姓名' width='65'></mu-table-column>
@@ -36,7 +36,7 @@
                         <mu-table-action-item label='删除' @bindClick='goDelete'></mu-table-action-item>
                     </mu-table-action>
                 </mu-table>
-                <mu-page :pageSize='pageObj.pageSize' :pageNo='pageObj.pageNo' :total='pageObj.total' @bindPageNoChange='bindPageNoChange' @bindPageSizeChange='bindPageSizeChange'>
+                <mu-page :pageNums='pageObj.pageNums' :defaultPageNum='pageObj.pageSize' :pageSize='pageObj.pageSize' :pageNo='pageObj.pageNo' :total='pageObj.total' @bindPageNoChange='bindPageNoChange' @bindPageSizeChange='bindPageSizeChange'>
                 </mu-page>
             </div>
             <mu-dialog ref='muDialog'></mu-dialog>
@@ -79,10 +79,12 @@ export default {
                 export: require('../../img/user/export.png')
             },
             tableData: [],
+            tableLoad: true,
             selectRowId: '',
             checkRows: [],
             pageObj: {
-                pageSize: 10,
+                pageNums: [1,2,3,4,5,6,7,8,9,10],
+                pageSize: 3,
                 pageNo: 1,
                 total: 0
             },
@@ -154,12 +156,14 @@ export default {
             @return
          */
         initData() {
+            this.tableLoad = true
             this.checkRows = []
             this.queryObj.pageSize = this.pageObj.pageSize
             this.queryObj.pageNo = this.pageObj.pageNo
             this.$axios.get(`${this.$domain}user/list`, {
                 params: this.queryObj
             }).then(res => {
+                this.tableLoad = false
                 if (res.code === 200) {
                     for (let i=0; i<res.data.length; i++) {
                         res.data[i].no = (this.pageObj.pageNo - 1) * this.pageObj.pageSize + i + 1

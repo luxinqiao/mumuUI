@@ -374,7 +374,7 @@
     }
     @keyframes shadeIn {
         from {
-            opacity: 0.1;
+            opacity: 0;
         }
         to {
             opacity: 0.6;

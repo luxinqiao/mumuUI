@@ -1,5 +1,6 @@
 import {muButtons, muButton} from './mu-buttons/index.js'
 import {muDialog} from './mu-dialog/index.js'
+import {muDate} from './mu-date/index.js'
 import {muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox} from './mu-form/index.js'
 import {muPage} from './mu-page/index.js'
 import {muSearch, muSearchText, muSearchSelect, muSearchButton} from './mu-search/index.js'
@@ -18,6 +19,7 @@ const install = function(Vue) {
     const components = [
         muButtons, muButton,
         muDialog,
+        muDate,
         muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox,
         muPage,
         muSearch, muSearchText, muSearchSelect, muSearchButton,
@@ -36,16 +38,18 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 //自适应布局：动态设置rem与px比例
-const resizeFontSize = (w) => {
-    document.documentElement.style.fontSize = document.documentElement.clientWidth / w * 10 + 'px'
+let pxW = 1920
+const resizeFontSize = () => {
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / pxW * 10 + 'px'
 }
-resizeFontSize(1920)
+resizeFontSize()
 window.addEventListener('resize', resizeFontSize, false)
 
 export default {
     install, //供Vue.use()方法安装
     muButtons, muButton,
     muDialog,
+    muDate,
     muForm, muFormFrame, muFormText, muFormTextarea, muFormSelect, muFormRadio, muFormCheckbox,
     muPage,
     muSearch, muSearchText, muSearchSelect, muSearchButton,
@@ -54,6 +58,7 @@ export default {
     muTree, muTreeItem,
     muSwiper,
     resetPxWidth: (w=1920) => { //重置基准像素宽度（默认1920px下，1rem=10px）
-        resizeFontSize(w)
+        pxW = w
+        resizeFontSize()
     }
 }

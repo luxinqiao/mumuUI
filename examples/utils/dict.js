@@ -129,7 +129,7 @@ const getDictDesc = (collection, field, value) => {
                 const dict_field = dict_collection.children[j]
                 if (dict_field.field == field) {
                     for (let k=0; k<dict_field.children.length; k++) {
-                        const dict_value = dict_field.children[j]
+                        const dict_value = dict_field.children[k]
                         if (dict_value.value == value) {
                             return dict_value.desc
                         }

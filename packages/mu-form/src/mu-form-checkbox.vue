@@ -87,7 +87,7 @@
              */
             change(itemVal) {
                 let valArr = []
-                if (this.value != '') {
+                if (this.value) {
                     valArr = this.value.split(',')
                 }
                 let isIn = false

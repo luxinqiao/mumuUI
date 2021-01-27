@@ -5,7 +5,7 @@
                 <img v-if='node.expanded' src='../img/expand-open.png' @click='closeNode(node)'>
                 <img v-else src='../img/expand-close.png' @click='openNode(node)'>
             </span>
-            <span class='text'>{{node.name}}</span>
+            <span class='text' @click='clickNode(node)'>{{node.name}}</span>
             <span class='check'>
                 <img v-if='node.checked' src='../img/check-active.png' @click='uncheckNode(node)'>
                 <img v-else src='../img/check-gray.png' @click='checkNode(node)'>
@@ -34,6 +34,14 @@
         },
         methods: {
             /**
+                点击节点
+                @param {Object} item 节点
+                @return
+             */
+            clickNode(item) {
+                this.getRootTree(this.$parent).$emit('bindClick', item)
+            },
+            /**
                 展开节点
                 @param {Object} item 节点
                 @return
@@ -41,12 +49,6 @@
             openNode(item) {
                 item.expanded = true
                 this.getRootTree(this.$parent).$emit('bindExpand', item)
-            },
-            getRootTree($parent) {
-                if ($parent.$options._componentTag == 'mu-tree') {
-                    return $parent
-                }
-                return this.getRootTree($parent.$parent)
             },
             /**
                 闭合节点
@@ -127,6 +129,17 @@
                     $parent.node.checked = false
                 }
                 this.refreshParentChecked($parent.$parent)
+            },
+            /**
+                获取根节点（递归）
+                @param {Object} $parent 父节点
+                @return {Object} 根节点
+             */
+            getRootTree($parent) {
+                if ($parent.$options._componentTag == 'mu-tree') {
+                    return $parent
+                }
+                return this.getRootTree($parent.$parent)
             }
         }
     }

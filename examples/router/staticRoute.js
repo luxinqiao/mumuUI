@@ -13,6 +13,9 @@ const routes = [{
 }, {
     path: '/tab',
     component: () => import('../pages/tab')
+}, {
+    path: '/date',
+    component: () => import('../pages/date')
 }]
 
 export default routes

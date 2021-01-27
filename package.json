@@ -1,6 +1,6 @@
 {
   "name": "mumu-ui",
-  "version": "0.1.9",
+  "version": "0.1.14",
   "description": "基于Vue快速构建Web应用的UI框架",
   "main": "lib/mumu-ui.umd.min.js",
   "keyword": "vue pc web mumu-ui mumu",

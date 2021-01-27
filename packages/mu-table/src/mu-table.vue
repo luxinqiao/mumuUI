@@ -35,6 +35,11 @@
                     </tr>
                 </tbody>
             </table>
+            <div id='loading' v-if='loading'>
+                <img src='../img/loading.gif'>
+                <span>加载中...</span>
+            </div>
+            <p id='noData' v-if='!loading && datas.length==0'>-- 暂无数据 --</p>
         </div>
     </div>
 </template>
@@ -64,6 +69,10 @@
                 default: '5rem'
             },
             isHasBorder: { //是否有边框
+                type: Boolean,
+                default: false
+            },
+            loading: {
                 type: Boolean,
                 default: false
             }
@@ -261,8 +270,31 @@
 
         }
         >.mu-table-tbody {
+            position: relative;
             height: calc(100% - 5rem);
+            min-height: 5rem;
             overflow: auto;
+            >#loading {
+                position: absolute;
+                top: 0; bottom: 0; left: 0; right: 0;
+                margin: auto;
+                width: 8rem; height: 2rem;
+                >img {
+                    float: left;
+                    margin-top: 0.4rem;
+                    width: 1.2rem; height: 1.2rem;
+                }
+                >span {
+                    float: left;
+                    margin-left: 0.8rem;
+                    height: 2rem;
+                    line-height: 2rem;
+                }
+            }
+            >#noData {
+                height: 5rem;
+                text-align: center; line-height: 5rem;
+            }
         }
         table {
             width: 100%;

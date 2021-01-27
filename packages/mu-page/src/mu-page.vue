@@ -29,12 +29,9 @@
         <div class='detailNum'>
             <span>每页显示</span>
             <select @change='changePageSize'>
-                <option>5</option>
-                <option selected>10</option>
-                <option>15</option>
-                <option>20</option>
+                <option :selected='item==defaultPageNum' v-for='(item, i) in pageNums' :key='i'>{{item}}</option>
             </select>
-            <span>条记录，共{{total}}条数据</span>
+            <span>条，共{{total}}条数据</span>
         </div>
     </div>
 </template>
@@ -43,6 +40,14 @@
     export default {
         name: 'muPage',
         props: {
+            pageNums: {
+                type: Array,
+                default: [5, 10, 15, 20]
+            },
+            defaultPageNum: {
+                type: Number,
+                default: 10
+            },
             pageSize: { //每页条数
                 type: Number,
                 default: 10
